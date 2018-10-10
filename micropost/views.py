@@ -50,7 +50,6 @@ def delete_entry(post_id):
         db.session.commit()
     return redirect(url_for('index'))
 
-
 @app.route('/edit/<int:post_id>', methods=('GET', 'POST'))
 def edit_entry(post_id):
     form = EditForm()
@@ -61,10 +60,12 @@ def edit_entry(post_id):
     else:
         form.title.data = entry.title
         form.body.data = entry.body
-    if form.validate_on submit() and (user_id == entry.user_id):
-        entry.title = form.title.data
-        entry.body = form.body.data
-        db.session.commit()
+    
+    if form.validate_on submit():
+        if user_id == entry.user_id:
+            entry.title = form.title.data
+            entry.body = form.body.data
+            db.session.commit()
     return render_template('edit_entry.html', form=form)
 
 @app.route('/login', methods=('GET', 'POST'))
