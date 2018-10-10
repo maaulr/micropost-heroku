@@ -1,5 +1,5 @@
 from datetime import datetime
-from journal import db
+from micropost import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
