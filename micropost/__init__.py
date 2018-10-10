@@ -12,4 +12,4 @@ app.wsgi_app = WhiteNoise(app.wsgi_app, root='/static')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from micropost import views
+from micropost import forms, models, views
