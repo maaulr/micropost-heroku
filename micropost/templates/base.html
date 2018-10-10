@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MicroJournal | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+  <body class="container-fluid">
+      <nav class="navbar navbar-light bg-light mb-4 border-bottom">
+        <a class="navbar-brand" href="{{ url_for('index') }}">MicroJournal</a>
+        <div class="navbar-nav flex-row align-items-center">
+        {% if session['user_id'] %}
+          <a class="nav-item btn btn-link text-uppercase" href="{{ url_for('add_entry') }}">add entry</a>
+          <a class="nav-item ml-2 btn btn-danger text-uppercase" href="{{ url_for('logout') }}">logout</a>
+        {% else %}
+          <a class="nav-item btn btn-outline-primary text-uppercase" href="{{ url_for('register') }}">register</a>
+          <a class="nav-item ml-2 btn btn-primary text-uppercase" href="{{ url_for('login') }}">login</a>
+        {% endif %}
+        </div>
+      </nav>
+      {% block body %}
+      {% endblock %}
+  </body>
+</html>

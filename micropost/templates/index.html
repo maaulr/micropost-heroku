@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block body %}
+  <article class="container-fluid mb-4">
+  {% if user %}
+    <h1>Hi, {{ user.username }}</h1>
+  {% endif %}
+    <p>
+      This is a basic microblog or microjournal made with Python, Flask, and Bootstrap 4.
+      This webapp is for showcase purpose, feel free to modify the code for production use to your needs
+      and a reminder to use the latest web security and practice in mind. For sugesstion and question, use
+      github issue tracker. More information <a href="https://github.com/maaulr">@github</a>.
+    </p>
+  </article>
+  <article class="container-fluid">
+  <h1 class="mb-2">Posts:</h1>
+  {% if not entries %}
+  <p>Whoops, no post found. Better start writing.</p>
+  {% endif %}
+  {% for entry in entries %}
+    <section class="d-flex flex-column mt-2 mb-2 border-bottom">
+      <div class="row">
+        <h3 class="col">{{ entry.title }}</h3>
+      </div>
+      <div class="row">
+        {% for p in entry.body.split('\r\n') %}
+        <p class="col-12">{{ p }}</p>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="col">
+          <p class="text-secondary font-italic">
+            by {{ entry.user.username }} on {{ entry.timestamp.strftime('%a %x') }}
+          </p>
+        </div>
+        <div class="col text-right">
+        {% if session['user_id'] == entry.user_id %}
+          <a href="{{ url_for('edit_entry', post_id=entry.id) }}">edit</a>
+          <a class="ml-1" href="{{ url_for('delete_entry', post_id=entry.id) }}">delete</a>
+        {% endif %}
+        </div>
+      </div>
+    </section>
+  {% endfor %}
+  </article>
+{% endblock %}

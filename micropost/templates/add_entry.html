@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add entry
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+  <h1>Add entry</h1>
+  <form action="" method="post">
+    {{ form.csrf_token }}
+    <p>
+      {{ form.title(placeholder="Title") }}
+    </p>
+    <p>
+      {{ form.body(placeholder="Write your thoughts...") }}
+    </p>
+    {{ form.submit() }}
+  </form>
+</div>
+{% endblock %}
