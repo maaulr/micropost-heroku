@@ -1,0 +1,1 @@
+web: gunicorn micropost:app --log-file=-
