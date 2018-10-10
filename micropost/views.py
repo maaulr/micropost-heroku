@@ -61,11 +61,10 @@ def edit_entry(post_id):
         form.title.data = entry.title
         form.body.data = entry.body
     
-    if form.validate_on submit():
-        if user_id == entry.user_id:
-            entry.title = form.title.data
-            entry.body = form.body.data
-            db.session.commit()
+    if form.validate_on_submit() and user_id == entry.user_id:
+        entry.title = form.title.data
+        entry.body = form.body.data
+        db.session.commit()
     return render_template('edit_entry.html', form=form)
 
 @app.route('/login', methods=('GET', 'POST'))
