@@ -95,7 +95,7 @@ def register():
         pw_hash = generate_password_hash(form.password.data)
         user = User.query.filter_by(username=username).first()
         if not user:
-            user = User(username=username, password=pw_hash)
+            user = User(username=username, password_hash=pw_hash)
             db.session.add(user)
             db.session.commit()
             return redirect(url_for('index'))
