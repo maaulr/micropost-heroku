@@ -1,1 +1,1 @@
-web: gunicorn micropost:app --log-file=-
+web: flask db upgrade; gunicorn micropost:app --log-file=-
