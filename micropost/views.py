@@ -61,7 +61,7 @@ def edit_entry(post_id):
     else:
         form.title.data = entry.title
         form.body.data = entry.body
-    if form.validate_on submit() & (user_id == entry.user_id):
+    if form.validate_on submit() and (user_id == entry.user_id):
         entry.title = form.title.data
         entry.body = form.body.data
         db.session.commit()
